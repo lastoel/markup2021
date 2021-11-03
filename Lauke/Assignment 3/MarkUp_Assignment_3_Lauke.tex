@@ -1,0 +1,107 @@
+\documentclass{beamer}
+
+\usetheme{default}
+\usecolortheme{beaver}
+
+\beamertemplatenavigationsymbolsempty
+\definecolor{light-gray}{gray}{0.1}
+
+% COVER SLIDE
+\title{Example document to recreate with \texttt{beamer} in \LaTeX{}}
+\author{Lauke Stoel}
+\date{\vspace*{-1cm}November 2021}
+\institute{\vspace*{-2cm}Markup Languages and Reproducible Programming in Statistics}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+% OUTLINE
+\begin{frame}{Outline}
+\tableofcontents %bases on what you put in \section and \subsection
+\end{frame}
+
+% WORKING WITH EQUATIONS
+\section{Working with equations}
+\begin{frame}{Working with equations}
+We define a set of equations as
+\begin{equation}
+a = b+c^2,
+\end{equation}
+
+\begin{equation}
+a - c^2 = b,
+\end{equation}
+
+\begin{equation}
+\text{left side} = \text{right side},
+\end{equation}
+
+\begin{equation}
+\text{left side} + \text{something} \geq \text{right side}, %geq = greater than or equal to
+\end{equation}
+
+for all something $>$ 0.
+\end{frame}
+
+% sub: Aligning the same equations
+\subsection{Aligning the same equations}
+\begin{frame}{Aligning the same equations}
+Aligning the equations by the equal sign gives a much better view into the placements
+of the separate equation components.
+
+\begin{align} % the & sign determines alignment
+a&=b+c^2,\\
+a-c^2&=b,\\
+\text{left side} &= \text{right side},\\
+\text{left side} + \text{something} & \geq \text{right side},
+\end{align}
+
+\end{frame}
+
+% sub: Omit equation numbering
+\subsection{Omit equation numbering}
+\begin{frame}{Omit equation numbering}
+Alternatively, the equation numbering can be omitted.
+
+\begin{align*} % the * omits the numbering
+a&=b+c^2\\
+a-c^2&=b\\
+\text{left side} &= \text{right side}\\
+\text{left side} + \text{something} & \geq \text{right side}
+\end{align*}
+
+\end{frame}
+
+% sub: Ugly alignment
+\subsection{Ugly alignment}
+\begin{frame}{Ugly alignment}
+Some components do not look well, when aligned. Especially equations with different heights and spacing. For example, 
+
+\begin{align}
+E&=mc^2,\\
+m&=\frac{E}{c^2},\\
+c&=\sqrt{\frac{E}{m}}.
+\end{align}
+
+Take that into account. 
+\end{frame}
+
+% DISCUSSION
+\section{Discussion}
+\begin{frame}{Discussion}
+This is where you'd normally give your audience a recap of your talk, where you could
+discuss e.g. the following
+
+\begin{itemize}
+\item Your main findings
+\item The consequences of your main findings
+\item Things to do
+\item Any other business not currently investigated, but related to your talk
+\end{itemize}
+
+\end{frame}
+
+\end{document}
