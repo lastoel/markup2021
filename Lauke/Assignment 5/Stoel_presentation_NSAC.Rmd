@@ -1,0 +1,112 @@
+---
+title: "NSAC Alpinism"
+author: "Lauke"
+date: "20/01/2022"
+output: ioslides_presentation
+logo: Logo-ribbon.png
+bibliography: references.bib
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(DT)
+library(plotly)
+library(bibtex)
+```
+
+```{r echo = F}
+set.seed(123)
+```
+
+
+```{r echo = F, message=F, warning=F}
+ID <- c(1:30)
+exp_years <- round(rnorm(30, 5, 1), digits = 0)
+mnts_climbed <- 0.8*exp_years + round(rnorm(30, 10, 5), digits = 0)
+fun_had <- round(0.6*exp_years + 0.8*mnts_climbed + rnorm(1, 0, 1), digits = 0)
+
+bergdat <- as.data.frame(cbind(ID, exp_years, mnts_climbed, fun_had))
+```
+
+
+## What's this about then
+
+This is a template shitty presentation about how awesome mountains are and how dope the people at the Nederlandse Studenten Alpen Club are for trying to climb them. 
+
+Check out the website of the NSAC at <https://nsac.alpenclub.nl/>.
+
+## So what are mountains again?
+
+<center> 
+<img src = "Mountain.jpg" width = 90%>
+</center>
+
+
+## Carefully collected data
+
+```{r echo = F}
+datatable(bergdat, options = list(pageLength = 5), caption = "Mountain climbers dataset")
+```
+## Data generation
+
+```{r eval = F}
+ID <- c(1:30)
+exp_years <- round(rnorm(30, 5, 1), 
+                   digits = 0)
+mnts_climbed <- 0.8*exp_years + round(rnorm(30, 10, 5), 
+                                      digits = 0)
+fun_had <- round(0.6*exp_years + 0.8*mnts_climbed + rnorm(1, 0, 1), 
+                 digits = 0)
+
+bergdat <- as.data.frame(cbind(ID, exp_years, mnts_climbed, fun_had))
+```
+
+
+## Careful analysis of this dataset
+```{r echo = F}
+p <- bergdat %>%
+  ggplot(aes(x = exp_years)) +
+  geom_histogram(binwidth = 1, colour = "black", fill = "forestgreen") +
+  labs(title="Experience histogram plot",x="Experience(years)", y = "Count")
+
+ggplotly(p)
+
+```
+## Course information {.columns-2}
+
+C1: \
+- Het leren voortbewegen in alle soorten basisterrein (rots, sneeuw, ijs, gletsjer) \
+- Inschatting en perceptie van alpiene gevaren \
+- Reddingstechnieken: gletsjerspleetredding (seirolle,prusiktechniek en Münchhausen) \
+- Het zelfstandig kunnen maken van F/L-toeren \
+
+C2: \
+- Voortbewegen in 2e– en 3e-graads terrein \
+- Het leren klimmen van (rots)graten \
+- Inschatting en perceptie van alpiene gevaren \
+- Zelfstandig kunnen maken van PD/WS touren \
+
+[@nsac]
+
+
+## It has some hard core science to it {.flexbox .vcenter}
+
+<center>
+
+$$
+\begin{align}
+Mount &= \beta_0 + \beta_1 Exp \;, \\
+Fun &= \beta_0 + \beta_1 Exp + \beta_2 Mount\;. \\
+\end{align}
+$$
+
+</center>
+
+## References
+
+
+
+```{r include = F}
+sessionInfo()
+```
+
