@@ -1,0 +1,59 @@
+---
+title: "ShinyShit"
+author: "Lauke"
+date: "23/01/2022"
+output: html_document
+runtime: shiny
+---
+
+```{r Data load}
+USdat <- as.data.frame(cbind(attributes(USArrests)$row.names, USArrests))
+row.names(USdat) <- NULL
+colnames(USdat)[1] <- "State"
+```
+
+```{r echo = F}
+library(shiny)
+library(ggplot2)
+library(tidyverse)
+
+ui <- fluidPage(
+  titlePanel("My first Shiny App"), 
+  h2("Ain't it pretty?"), 
+  br(),
+  em("NB: this is a completely nonsensicle and useless representation of USArrests data. It's just an exercise, calm down. Also I had a fancier one with two inputs first with red and blue states but it wouldn't deploy. It didn't like that I used inner_join somewhere"), 
+  br(), 
+  br(),
+  
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("UrbanInput", "UrbanPop", 
+                  min = min(USdat$UrbanPop), 
+                  max = max(USdat$UrbanPop), 
+                  value = c(50, 60), post = "%")),
+      mainPanel(
+      plotOutput("coolplot")
+    )
+  )
+)
+
+
+server <- function(input, output) {
+  filtered <- reactive({
+   USdat %>% 
+      filter(UrbanPop >= input$UrbanInput[1],
+             UrbanPop <= input$UrbanInput[2]
+             )
+  })
+  output$coolplot <- renderPlot({
+      ggplot(filtered(), aes(Murder)) +
+      geom_histogram(binwidth = 2) +
+      ggtitle("Histogram of Murder (interactive)")
+  })
+
+}
+
+
+shinyApp(ui = ui, server = server)
+```
+
